@@ -10,17 +10,15 @@ import Foundation
 
 enum NetworkResponse:String {
     case success
-    case authenticationError = "You need to be authenticated first."
-    case badRequest = "Bad request"
-    case outdated = "The url you requested is outdated."
-    case failed = "Network request failed."
-    case noData = "Response returned with no data to decode."
+    case failed = "Oops Something went wrong."
     case unableToDecode = "We could not decode the response."
+    case noData = "Response returned with no data to decode."
+    case noNetwork = "Please check your network connection."
 }
 
-enum Result<String>{
+enum Result<Value>{
     case success
-    case failure(String)
+    case failure(ApiError)
 }
 
 struct NetworkManager {
@@ -28,19 +26,19 @@ struct NetworkManager {
     static let apiKey   = "Yo0Zzu3ciPNSqOsKetedcLjZNDlUcP3aR1NUFY5R"
     let router = Router<PlanetApi>()
     
-    func getPlanetDetail(completion: @escaping (_ movie: Planet?,_ error: String?)->()){
+    func getPlanetDetail(completion: @escaping (_ movie: Planet?,_ error: ApiError?)->()){
         router.request(.aPOD) { data, response, error in
             
-            if error != nil {
-                completion(nil, "Please check your network connection.")
+            if error != nil, let err = error as? NSError {
+                completion(nil, ApiError.defaultSetup(code: err.code, msg: error?.localizedDescription))
             }
             
             if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkResponse(response)
+                let result = self.handleNetworkResponse(response, error: error, data: data)
                 switch result {
                 case .success:
                     guard let responseData = data else {
-                        completion(nil, NetworkResponse.noData.rawValue)
+                        completion(nil, ApiError.defaultSetup(msg: NetworkResponse.noData.rawValue))
                         return
                     }
                     do {
@@ -51,7 +49,7 @@ struct NetworkManager {
                         completion(apiResponse,nil)
                     }catch {
                         print(error)
-                        completion(nil, NetworkResponse.unableToDecode.rawValue)
+                        completion(nil, ApiError.defaultSetup(msg: NetworkResponse.unableToDecode.rawValue))
                     }
                 case .failure(let networkFailureError):
                     completion(nil, networkFailureError)
@@ -60,13 +58,20 @@ struct NetworkManager {
         }
     }
     
-    fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>{
+    fileprivate func handleNetworkResponse(_ response: HTTPURLResponse , error : Error? , data : Data?) -> Result<String>{
         switch response.statusCode {
-        case 200...299: return .success
-        case 401...500: return .failure(NetworkResponse.authenticationError.rawValue)
-        case 501...599: return .failure(NetworkResponse.badRequest.rawValue)
-        case 600: return .failure(NetworkResponse.outdated.rawValue)
-        default: return .failure(NetworkResponse.failed.rawValue)
+        case 200 : return .success
+        default :
+            do {
+                guard let responseData = data else {
+                    return .failure(ApiError.defaultSetup())
+                }
+                let apiResponse = try JSONDecoder().decode(ApiError.self, from: responseData)
+                return .failure(apiResponse)
+
+            } catch {
+                return .failure(ApiError.defaultSetup(msg: NetworkResponse.unableToDecode.rawValue))
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         NetworkManager().getPlanetDetail { planet, error in
-          //  print("Error\(error)")
+            print("Error\(error)")
         }
     }
 

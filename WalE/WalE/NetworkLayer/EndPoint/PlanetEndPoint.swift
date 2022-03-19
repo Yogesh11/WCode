@@ -49,7 +49,7 @@ extension PlanetApi: EndPointType {
         case .aPOD :
             return .requestParameters(bodyParameters: nil,
                                       bodyEncoding: .urlEncoding,
-                                      urlParameters: ["date":"2022-03-19",
+                                      urlParameters: ["date":"2022-03-20",
                                                       "api_key":NetworkManager.apiKey])
         }
     }
