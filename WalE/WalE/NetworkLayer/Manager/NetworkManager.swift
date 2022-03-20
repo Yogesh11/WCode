@@ -26,7 +26,7 @@ struct NetworkManager {
     static let apiKey   = "Yo0Zzu3ciPNSqOsKetedcLjZNDlUcP3aR1NUFY5R"
     let router = Router<PlanetApi>()
     
-    func getPlanetDetail(completion: @escaping (_ movie: Planet?,_ error: ApiError?)->()){
+    func getPlanetDetail(completion: @escaping (_ planet: Planet?,_ error: ApiError?)->()){
         router.request(.aPOD) { data, response, error in
             
             if error != nil, let err = error as? NSError {
