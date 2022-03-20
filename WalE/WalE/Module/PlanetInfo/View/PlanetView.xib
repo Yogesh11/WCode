@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PlanetView" customModule="WalE" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hU-Yn-4Zg">
+                    <rect key="frame" x="16" y="60" width="382" height="0.0"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lyv-OM-hCE">
+                    <rect key="frame" x="16" y="68" width="382" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pFh-pa-e8G">
+                    <rect key="frame" x="16" y="76" width="382" height="786"/>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9hU-Yn-4Zg" secondAttribute="trailing" constant="16" id="CLV-Jx-ElM"/>
+                <constraint firstItem="9hU-Yn-4Zg" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="GZv-8o-aD2"/>
+                <constraint firstItem="pFh-pa-e8G" firstAttribute="leading" secondItem="9hU-Yn-4Zg" secondAttribute="leading" id="JfI-gw-9mE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="pFh-pa-e8G" secondAttribute="bottom" id="TYr-hF-U1c"/>
+                <constraint firstItem="9hU-Yn-4Zg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="U2I-CE-Lj6"/>
+                <constraint firstItem="Lyv-OM-hCE" firstAttribute="top" secondItem="9hU-Yn-4Zg" secondAttribute="bottom" constant="8" id="WlT-nB-FgM"/>
+                <constraint firstItem="Lyv-OM-hCE" firstAttribute="leading" secondItem="9hU-Yn-4Zg" secondAttribute="leading" id="X38-BT-9Tb"/>
+                <constraint firstItem="pFh-pa-e8G" firstAttribute="trailing" secondItem="9hU-Yn-4Zg" secondAttribute="trailing" id="jzs-pS-kLN"/>
+                <constraint firstItem="Lyv-OM-hCE" firstAttribute="trailing" secondItem="9hU-Yn-4Zg" secondAttribute="trailing" id="kQI-fh-mij"/>
+                <constraint firstItem="pFh-pa-e8G" firstAttribute="top" secondItem="Lyv-OM-hCE" secondAttribute="bottom" constant="8" id="kws-LW-GcG"/>
+            </constraints>
+            <connections>
+                <outlet property="planetImage" destination="pFh-pa-e8G" id="B2o-ia-TRC"/>
+                <outlet property="subtitleView" destination="Lyv-OM-hCE" id="Quz-xJ-Nqy"/>
+                <outlet property="titleLabel" destination="9hU-Yn-4Zg" id="qsz-Az-DsT"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="114"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

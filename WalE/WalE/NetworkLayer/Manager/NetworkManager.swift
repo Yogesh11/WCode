@@ -14,6 +14,7 @@ enum NetworkResponse:String {
     case unableToDecode     = "We could not decode the response."
     case noData             = "Response returned with no data to decode."
     case lastSyncMessage    = "We are not connected to the internet, showing you the last image we have."
+    case imageError         = "Not able to fetch image"
 }
 
 enum Result<Value>{
@@ -46,7 +47,14 @@ struct NetworkManager {
                         let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
                         print(jsonData)
                         let apiResponse = try JSONDecoder().decode(Planet.self, from: responseData)
-                        completion(apiResponse,nil)
+                        if let url = apiResponse.hdurl, url.isEmpty == false , let mUrl = URL(string: url) {
+                            self.loadData(url: mUrl) { data, error in
+                                completion(apiResponse,nil)
+                            }
+                        } else{
+                            completion(nil, ApiError.defaultSetup(msg: NetworkResponse.imageError.rawValue))
+                        }
+                       
                     }catch {
                         print(error)
                         completion(nil, ApiError.defaultSetup(msg: NetworkResponse.unableToDecode.rawValue))
@@ -72,6 +80,49 @@ struct NetworkManager {
             } catch {
                 return .failure(ApiError.defaultSetup(msg: NetworkResponse.unableToDecode.rawValue))
             }
+        }
+    }
+    
+    func download(url: URL, toFile file: URL, completion: @escaping (Error?) -> Void) {
+        let task = URLSession.shared.downloadTask(with: url) {
+            (tempURL, response, error) in
+            guard let tempURL = tempURL else {
+                completion(error)
+                return
+            }
+
+            do {
+                if FileManager.default.fileExists(atPath: file.path) {
+                    try FileManager.default.removeItem(at: file)
+                }
+                try FileManager.default.copyItem(
+                    at: tempURL,
+                    to: file
+                )
+
+                completion(nil)
+            }
+            
+            catch let fileError {
+                completion(error)
+            }
+        }
+        task.resume()
+    }
+    
+    func loadData(url: URL, completion: @escaping (Data?, Error?) -> Void) {
+        let cachedFile = FileManager.default.temporaryDirectory
+            .appendingPathComponent(
+                url.lastPathComponent,
+                isDirectory: false
+            )
+        if let data = try? Data(contentsOf: cachedFile) {
+            completion(data, nil)
+            return
+        }
+        download(url: url, toFile: cachedFile) { (error) in
+            let data = try?  Data(contentsOf: cachedFile)
+            completion(data, error)
         }
     }
 }

@@ -10,9 +10,20 @@ import UIKit
 class ViewController: UIViewController {
     fileprivate var planetViewModel = PlanetViewModel()
     private var alert : UIAlertController?
+    private var planetView : PlanetView?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+       if let planetView = Bundle.main.loadNibNamed("PlanetView",
+                                                   owner: view,
+                                                    options: nil)?.first as? PlanetView {
+           planetView.translatesAutoresizingMaskIntoConstraints = false
+           view.addSubview(planetView)
+           planetView.setConstraint(rootView: view)
+           planetView.backgroundColor  = .white
+           self.planetView = planetView
+       }
+       
        
     }
     
@@ -27,12 +38,15 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {[weak self] in
                 if let err = error {
                    self?.showAlertWithMessage(msg: err.msg)
-                }else{
-                  
                 }
+                self?.refreshUI()
                 self?.showLoader(false)
             }
         }
+    }
+    
+    func refreshUI(){
+        planetView?.refreshView(vm: planetViewModel)
     }
     
     func showLoader(_ isEnable : Bool = true) {

@@ -56,5 +56,23 @@ class PlanetViewModel: NSObject {
             planet = persistentStorage?.getValueForKey(date)
         }
     }
+    func downloadImage(_ closure : @escaping (Data? , Error?)->Void){
+        if let url = planet?.hdurl , url.isEmpty == false , let mUrl = URL(string: url) {
+            networkManager?.loadData(url: mUrl, completion: { data, error in
+                closure(data , error)
+            })
+        } else{
+            closure(nil, nil)
+        }
+        
+    }
+    
+    func getTitle()->String?{
+        planet?.title
+    }
+    
+    func getExplanation()->String?{
+        planet?.explanation
+    }
 }
     

@@ -13,6 +13,8 @@
 		228D4DA627E6D166004A5FCC /* PlanetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D4DA527E6D166004A5FCC /* PlanetViewModel.swift */; };
 		228D4DA927E6D6C2004A5FCC /* PersistentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D4DA827E6D6C2004A5FCC /* PersistentStorage.swift */; };
 		228D4DAC27E705F1004A5FCC /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D4DAB27E705F1004A5FCC /* Extension.swift */; };
+		228D4DB127E71EC3004A5FCC /* PlanetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D4DB027E71EC3004A5FCC /* PlanetView.swift */; };
+		228D4DB327E71EDA004A5FCC /* PlanetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228D4DB227E71EDA004A5FCC /* PlanetView.xib */; };
 		22CCE0EE27E60A6E00BCBB32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCE0ED27E60A6E00BCBB32 /* AppDelegate.swift */; };
 		22CCE0F027E60A6E00BCBB32 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCE0EF27E60A6E00BCBB32 /* SceneDelegate.swift */; };
 		22CCE0F527E60A6F00BCBB32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22CCE0F327E60A6F00BCBB32 /* Main.storyboard */; };
@@ -57,6 +59,8 @@
 		228D4DA527E6D166004A5FCC /* PlanetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetViewModel.swift; sourceTree = "<group>"; };
 		228D4DA827E6D6C2004A5FCC /* PersistentStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStorage.swift; sourceTree = "<group>"; };
 		228D4DAB27E705F1004A5FCC /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		228D4DB027E71EC3004A5FCC /* PlanetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetView.swift; sourceTree = "<group>"; };
+		228D4DB227E71EDA004A5FCC /* PlanetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlanetView.xib; sourceTree = "<group>"; };
 		22CCE0EA27E60A6E00BCBB32 /* WalE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CCE0ED27E60A6E00BCBB32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22CCE0EF27E60A6E00BCBB32 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 		224E03AD27E622770074A16A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				228D4DB027E71EC3004A5FCC /* PlanetView.swift */,
+				228D4DB227E71EDA004A5FCC /* PlanetView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -159,6 +165,7 @@
 		228D4DA727E6D693004A5FCC /* PersistentStorage */ = {
 			isa = PBXGroup;
 			children = (
+				228D4DAD27E71913004A5FCC /* FileStorage */,
 				228D4DA827E6D6C2004A5FCC /* PersistentStorage.swift */,
 			);
 			path = PersistentStorage;
@@ -170,6 +177,13 @@
 				228D4DAB27E705F1004A5FCC /* Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		228D4DAD27E71913004A5FCC /* FileStorage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FileStorage;
 			sourceTree = "<group>";
 		};
 		22CCE0E127E60A6E00BCBB32 = {
@@ -390,6 +404,7 @@
 			files = (
 				22CCE0FA27E60A7400BCBB32 /* LaunchScreen.storyboard in Resources */,
 				22CCE0F727E60A7400BCBB32 /* Assets.xcassets in Resources */,
+				228D4DB327E71EDA004A5FCC /* PlanetView.xib in Resources */,
 				22CCE0F527E60A6F00BCBB32 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,6 +443,7 @@
 				224E03B227E62B140074A16A /* ApiError.swift in Sources */,
 				22CCE15027E6181700BCBB32 /* URLParameterEncoding.swift in Sources */,
 				224E03AE27E622770074A16A /* ViewController.swift in Sources */,
+				228D4DB127E71EC3004A5FCC /* PlanetView.swift in Sources */,
 				22CCE15127E6181700BCBB32 /* JSONParameterEncoder.swift in Sources */,
 				22CCE15427E6181700BCBB32 /* HTTPTask.swift in Sources */,
 				22CCE0F027E60A6E00BCBB32 /* SceneDelegate.swift in Sources */,
