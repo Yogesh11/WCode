@@ -15,5 +15,9 @@ struct ApiError : Codable {
     static func defaultSetup(code : Int? = 1000 , msg: String? = NetworkResponse.failed.rawValue , service_version : String? = "V1") ->ApiError {
         ApiError(code: code, msg: msg, service_version: service_version)
     }
+    
+    mutating func updateErrorMsg(msg : String){
+        self.msg = msg
+    }
 }
 

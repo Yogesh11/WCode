@@ -26,9 +26,9 @@ class ViewController: UIViewController {
         planetViewModel.getPlanetData { error in
             DispatchQueue.main.async {[weak self] in
                 if let err = error {
-                    self?.showAlertWithMessage(msg: err.msg)
+                   self?.showAlertWithMessage(msg: err.msg)
                 }else{
-                    
+                  
                 }
                 self?.showLoader(false)
             }
@@ -55,9 +55,11 @@ class ViewController: UIViewController {
     }
 
     func showAlertWithMessage(msg : String?){
-        let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self?.present(alert, animated: true, completion: nil)
+        }
     }
 }
 

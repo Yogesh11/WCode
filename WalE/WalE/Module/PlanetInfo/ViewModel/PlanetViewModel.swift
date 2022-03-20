@@ -22,7 +22,18 @@ class PlanetViewModel: NSObject {
     func getPlanetData(_ closure :@escaping (ApiError?)->Void){
         networkManager?.getPlanetDetail(completion: { [weak self] planet, error in
             if let err = error {
-                self?.restoreFromCache()
+                if err.code == -1009{
+                    self?.restoreFromCache()
+                    if self?.planet == nil {
+                        self?.restoreLastSyncData()
+                        if self?.planet != nil {
+                            var errObj = err
+                            errObj.updateErrorMsg(msg: NetworkResponse.lastSyncMessage.rawValue)
+                            closure(err)
+                            return
+                        }
+                    }
+                }
                  closure(err)
             } else{
                 self?.planet = planet
@@ -38,6 +49,12 @@ class PlanetViewModel: NSObject {
     
     func restoreFromCache(){
         planet = persistentStorage?.getValueForKey(Date().getCurrentDate())
+    }
+    
+    func restoreLastSyncData(){
+        if let date =  persistentStorage?.getLastSyncDate() , date.isEmpty == false {
+            planet = persistentStorage?.getValueForKey(date)
+        }
     }
 }
     

@@ -10,10 +10,10 @@ import Foundation
 
 enum NetworkResponse:String {
     case success
-    case failed = "Oops Something went wrong."
-    case unableToDecode = "We could not decode the response."
-    case noData = "Response returned with no data to decode."
-    case noNetwork = "Please check your network connection."
+    case failed             = "Oops Something went wrong."
+    case unableToDecode     = "We could not decode the response."
+    case noData             = "Response returned with no data to decode."
+    case lastSyncMessage    = "We are not connected to the internet, showing you the last image we have."
 }
 
 enum Result<Value>{

@@ -13,6 +13,7 @@ struct PersistentStorage {
             let encoder = JSONEncoder()
             if let data = try? encoder.encode(obj) {
                 UserDefaults.standard.set(data, forKey: planet?.date ?? Date().getCurrentDate())
+                UserDefaults.standard.set(Date().getCurrentDate(), forKey: "lastSyncDate")
             }
         }
     }
@@ -25,5 +26,9 @@ struct PersistentStorage {
             }
         }
         return nil
+    }
+    
+    func getLastSyncDate()->String? {
+        UserDefaults.standard.string(forKey: "lastSyncDate")
     }
 }
